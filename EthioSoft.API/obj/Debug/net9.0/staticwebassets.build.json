@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "wVRz/1zEotQVbfpNw986rICHlybPmZfPwuJLJ4yLO7Y=",
+  "Source": "EthioSoft.API",
+  "BasePath": "_content/EthioSoft.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
