@@ -63,6 +63,17 @@ namespace EthioSoft.API.Controllers
                     return BadRequest(new { message = "Failed to create user.", errors = result.Errors });
                 }
 
+                // Assign user to the corresponding ASP.NET Identity role
+                string roleName = userRole.ToString();
+                var roleResult = await _userManager.AddToRoleAsync(user, roleName);
+                
+                if (!roleResult.Succeeded)
+                {
+                    // If role assignment fails, we should still return success since user was created
+                    // but log the role assignment error
+                    Console.WriteLine($"Warning: Failed to assign role {roleName} to user {user.Email}");
+                }
+
                 // Generate JWT token
                 var token = _jwtService.GenerateToken(user);
 
@@ -73,9 +84,9 @@ namespace EthioSoft.API.Controllers
                     User = new UserDto
                     {
                         Id = user.Id,
-                        Email = user.Email,
-                        FullName = user.FullName,
-                        Role = user.Role,
+                        Email = user.Email ?? string.Empty,
+                        FullName = user.FullName ?? string.Empty,
+                        Role = user.Role.ToString(),
                         CreatedAt = user.CreatedAt
                     }
                 });
@@ -121,9 +132,9 @@ namespace EthioSoft.API.Controllers
                     User = new UserDto
                     {
                         Id = user.Id,
-                        Email = user.Email,
-                        FullName = user.FullName,
-                        Role = user.Role,
+                        Email = user.Email ?? string.Empty,
+                        FullName = user.FullName ?? string.Empty,
+                        Role = user.Role.ToString(),
                         CreatedAt = user.CreatedAt
                     }
                 });
@@ -154,9 +165,9 @@ namespace EthioSoft.API.Controllers
                 return Ok(new UserDto
                 {
                     Id = user.Id,
-                    Email = user.Email,
-                    FullName = user.FullName,
-                    Role = user.Role,
+                    Email = user.Email ?? string.Empty,
+                    FullName = user.FullName ?? string.Empty,
+                    Role = user.Role.ToString(),
                     CreatedAt = user.CreatedAt
                 });
             }

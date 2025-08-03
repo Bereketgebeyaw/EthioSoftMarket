@@ -30,11 +30,11 @@ namespace EthioSoft.API.Services
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Email, user.Email ?? ""),
                 new Claim(ClaimTypes.Name, user.FullName),
                 new Claim("role", user.Role.ToString()),
-                new Claim("userId", user.Id)
+                new Claim("userId", user.Id.ToString())
             };
 
             var tokenDescriptor = new SecurityTokenDescriptor

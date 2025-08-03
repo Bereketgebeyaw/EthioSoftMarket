@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EthioSoft.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+55be884a6c2d859feacfa33b2966bd401281bb47")]
 [assembly: System.Reflection.AssemblyProductAttribute("EthioSoft.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EthioSoft.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

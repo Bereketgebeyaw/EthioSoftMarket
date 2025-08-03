@@ -1,65 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import LoginForm from './components/LoginForm.jsx';
-import RegisterForm from './components/RegisterForm.jsx';
-import Dashboard from './components/Dashboard.jsx';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import SellerDashboard from './components/dashboard/SellerDashboard.jsx';
+import BuyerDashboard from './components/dashboard/BuyerDashboard.jsx';
+import AdminDashboard from './components/dashboard/AdminDashboard.jsx';
+import LandingPage from './components/layout/LandingPage.jsx';
+import ProtectedRoute from './components/auth/ProtectedRoute.jsx';
+import AuthWrapper from './components/auth/AuthWrapper.jsx';
+import './styles/App.css';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [showRegister, setShowRegister] = useState(false);
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    // Check if user is already logged in
-    const token = localStorage.getItem('token');
-    const userData = localStorage.getItem('user');
-    
-    if (token && userData) {
-      try {
-        const parsedUser = JSON.parse(userData);
-        setUser(parsedUser);
-        setIsAuthenticated(true);
-      } catch (error) {
-        console.error('Failed to parse user data:', error);
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-      }
-    }
-  }, []);
-
-  const handleAuthSuccess = () => {
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      setUser(JSON.parse(userData));
-      setIsAuthenticated(true);
-    }
-  };
-
-  if (isAuthenticated && user) {
-    return <Dashboard />;
-  }
-
   return (
-    <div className="App">
-      <div className="auth-container">
-        <div className="auth-header">
-          <h1>EthioSoft Marketplace</h1>
-          <p>A digital marketplace for Ethiopian software developers</p>
-        </div>
+    <Router>
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<AuthWrapper />} />
+        <Route path="/register" element={<AuthWrapper />} />
         
-        {showRegister ? (
-          <RegisterForm 
-            onSuccess={handleAuthSuccess}
-            onSwitchToLogin={() => setShowRegister(false)}
-          />
-        ) : (
-          <LoginForm 
-            onSuccess={handleAuthSuccess}
-            onSwitchToRegister={() => setShowRegister(true)}
-          />
-        )}
-      </div>
-    </div>
+        {/* Protected Routes */}
+        <Route 
+          path="/seller" 
+          element={
+            <ProtectedRoute allowedRoles={['Seller']}>
+              <SellerDashboard />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/buyer" 
+          element={
+            <ProtectedRoute allowedRoles={['Buyer']}>
+              <BuyerDashboard />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/admin" 
+          element={
+            <ProtectedRoute allowedRoles={['Admin']}>
+              <AdminDashboard />
+            </ProtectedRoute>
+          } 
+        />
+        
+        {/* Catch all route - redirect to home */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Router>
   );
 }
 

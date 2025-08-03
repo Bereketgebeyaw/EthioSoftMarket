@@ -9,7 +9,7 @@ namespace EthioSoft.API.Models
         public int SoftwareId { get; set; }
         
         [Required]
-        public string UserId { get; set; } = string.Empty;
+        public int UserId { get; set; }
         
         [Range(1, 5)]
         public int Rating { get; set; }

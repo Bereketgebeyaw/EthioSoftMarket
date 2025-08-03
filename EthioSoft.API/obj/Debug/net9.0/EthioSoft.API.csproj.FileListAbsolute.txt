@@ -136,3 +136,4 @@
 /Users/mac/Desktop/EthioSoft-Marketplace/EthioSoft.API/obj/Debug/net9.0/ref/EthioSoft.API.dll
 /Users/mac/Desktop/EthioSoft-Marketplace/EthioSoft.API/bin/Debug/net9.0/Npgsql.dll
 /Users/mac/Desktop/EthioSoft-Marketplace/EthioSoft.API/bin/Debug/net9.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
+/Users/mac/Desktop/EthioSoft-Marketplace/EthioSoft.API/obj/Debug/net9.0/EthioSoft.API.sourcelink.json

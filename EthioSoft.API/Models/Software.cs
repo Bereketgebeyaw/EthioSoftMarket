@@ -35,7 +35,7 @@ namespace EthioSoft.API.Models
         public int CategoryId { get; set; }
         
         [Required]
-        public string UserId { get; set; } = string.Empty;
+        public int UserId { get; set; }
         
         public bool IsApproved { get; set; } = false;
         
